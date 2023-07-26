@@ -9,8 +9,8 @@ const User = require("./db/userModel");
 dbConnect();
 
 const newUser = new User({
-  email: "xyz@example2.com",
-  password: "12345678",
+  email: "khan@example2.com",
+  password: "090078601",
 });
  //inserting new user
 newUser
@@ -30,5 +30,14 @@ User.find({ email: "xyz@example2.com" })
   .catch((error) => {
     console.error("Error finding users", error);
   });
+
+    //update about specific user
+User.updateOne({ email: "xyz@example2.com"}, {password: 'newpassword123'} )
+.then(() => {
+  console.log("User Updated successfully");
+})
+.catch((error) => {
+  console.error("Error updating users", error);
+});
 
 module.exports = app;
