@@ -1,26 +1,12 @@
-const express = require('express');
+const http = require('http');
+const app = require('/.app');
 
-const bodyParser = require('body-parser');
+app.set('port', process.env.PORT ?? 5000);
 
-const app = express();
+const server = http.createServer(app);
 
-const port = 5000;
-
-app.use(bodyParser.json());
-
-let todos = [
-    {id:1, title: "Todo1"},
-    {id:2, title: "Todo2"},
-    {id:3, title: "Todo3"}
-]
-
-app.get('/todos', (req, res) =>{
-    res.json(todos);
+server.maxConnections('listening', () => {
+    console.log('Listening on port' + (process.env.PORT ?? 5000))
 })
 
-app.listen(port, () =>{
-    console.log('Server running on port ${port}')
-})
-
-//http://localhost:5000/todos
-//to run server node index.js
+server.listen(process.env.PORT ?? 5000)
